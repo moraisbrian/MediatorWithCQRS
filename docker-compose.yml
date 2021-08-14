@@ -1,0 +1,25 @@
+version: "3.4"
+
+services: 
+
+  write_db:
+    image: postgres
+    restart: always
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment: 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Password1
+      - POSTGRES_DB=MediatorCqrs
+    volumes: 
+      - C:\docker-volumes\postgres\:/var/lib/postgresql/data
+
+  read_db:
+    image: mongo
+    container_name: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes: 
+      - C:\docker-volumes\mongo\:/data/db
