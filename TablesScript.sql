@@ -1,0 +1,8 @@
+CREATE TABLE "Product"(
+	"Id" SERIAL PRIMARY KEY,
+	"Name" VARCHAR(50) NOT NULL,
+	"Amount" INTEGER NOT NULL,
+	"Price" MONEY NOT NULL,
+	"CreatedAt" DATE NOT NULL,
+	"UpdatedAt" DATE NOT NULL
+);

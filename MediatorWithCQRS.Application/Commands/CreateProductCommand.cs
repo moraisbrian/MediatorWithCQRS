@@ -3,7 +3,7 @@ using MediatR;
 
 namespace MediatorWithCQRS.Application.Commands
 {
-    public class CreateProductCommand : IRequest<DefaultCommandResult>
+    public class CreateProductCommand : IRequest<CommandResult>
     {
         public string Name { get; set; }
         public int Amount { get; set; }

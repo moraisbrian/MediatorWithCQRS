@@ -1,11 +1,13 @@
 ﻿using MediatorWithCQRS.Application.Commands;
+using MediatorWithCQRS.Application.Queries;
+using MediatorWithCQRS.Application.QueriesResult;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace MediatorWithCQRS.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/products")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -15,10 +17,13 @@ namespace MediatorWithCQRS.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public IActionResult GetTest()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<FindProductByIdQueryResult>> GetTest(int id)
         {
-            return Ok();
+            var query = new FindProductByIdQuery();
+            query.Id = id;
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
 
         [HttpPost]

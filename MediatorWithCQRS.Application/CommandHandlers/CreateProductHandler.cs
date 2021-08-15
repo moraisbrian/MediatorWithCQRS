@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MediatorWithCQRS.Application.CommandHandlers
 {
-    public class CreateProductHandler : IRequestHandler<CreateProductCommand, DefaultCommandResult>
+    public class CreateProductHandler : IRequestHandler<CreateProductCommand, CommandResult>
     {
         private readonly IProductRepository _repository;
         public CreateProductHandler(IProductRepository repository)
@@ -16,7 +16,7 @@ namespace MediatorWithCQRS.Application.CommandHandlers
             _repository = repository;
         }
 
-        public async Task<DefaultCommandResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             var product = new Product();
             product.Name = request.Name;
@@ -26,9 +26,9 @@ namespace MediatorWithCQRS.Application.CommandHandlers
             var result = await _repository.AddProduct(product);
 
             if (result)
-                return new DefaultCommandResult { Success = true, Message = "Produto adicionado com sucesso" };
+                return new CommandResult { Success = true, Message = "Produto adicionado com sucesso" };
             else
-                return new DefaultCommandResult { Success = false, Message = "Erro ao adicionar produto" };
+                return new CommandResult { Success = false, Message = "Erro ao adicionar produto" };
         }
     }
 }
