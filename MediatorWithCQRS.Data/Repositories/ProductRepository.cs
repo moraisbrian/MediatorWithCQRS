@@ -57,7 +57,7 @@ namespace MediatorWithCQRS.Data.Repositories
                     new { Id = id}
                 );
 
-                if (result > 1)
+                if (result == 1)
                     return true;
             }
 
@@ -102,21 +102,19 @@ namespace MediatorWithCQRS.Data.Repositories
                     SET ""Name"" = @Name,
                     ""Amount"" = @Amount,
                     ""Price"" = @Price,
-                    ""CreatedAt"" = @CreatedAt,
                     ""UpdatedAt"" = @UpdatedAt
-                    ""WHERE Id"" = @Id",
+                    WHERE ""Id"" = @Id",
                     new
                     {
                         Id = product.Id,
                         Name = product.Name,
                         Amount = product.Amount,
                         Price = product.Price,
-                        CreatedAt = product.CreatedAt,
                         UpdatedAt = DateTime.Now
                     }
                 );
 
-                if (result > 1)
+                if (result == 1)
                     return true;
             }
 

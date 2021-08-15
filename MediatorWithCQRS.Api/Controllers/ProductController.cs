@@ -58,7 +58,7 @@ namespace MediatorWithCQRS.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> AddProduct([FromBody] CreateProductCommand createProductCommand)
+        public async Task<ActionResult<CommandResult>> AddProduct([FromBody] CreateProductCommand createProductCommand)
         {
             try
             {
@@ -75,6 +75,50 @@ namespace MediatorWithCQRS.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest($"Erro ao adicionar produto: {ex.Message}");
+            }
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<CommandResult>> UpdateProduct([FromBody] UpdateProductCommand updateProductCommand)
+        {
+            try
+            {
+                if (updateProductCommand.IsValid())
+                {
+                    var result = await _mediator.Send(updateProductCommand);
+                    return Ok(result);
+                }
+                else
+                {
+                    throw new ArgumentException("Valores nulos ou vazio");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao atualizar produto: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<CommandResult>> DeleteProductById(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    var query = new DeleteProductCommand();
+                    query.Id = id;
+                    var result = await _mediator.Send(query);
+                    return Ok(result);
+                }
+                else
+                {
+                    throw new ArgumentException("Id menor ou igual a 0");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao deletar produto: {ex.Message}");
             }
         }
     }

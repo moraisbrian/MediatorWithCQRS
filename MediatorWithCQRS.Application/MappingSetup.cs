@@ -14,6 +14,8 @@ namespace MediatorWithCQRS.Application
             CreateMap<Product[], IEnumerable<FindProductQueryResult>>();
 
             CreateMap<CreateProductCommand, Product>();
+
+            CreateMap<UpdateProductCommand, Product>();
         }
     }
 }
