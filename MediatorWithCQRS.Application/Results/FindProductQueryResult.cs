@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace MediatorWithCQRS.Application.QueriesResult
+namespace MediatorWithCQRS.Application.Results
 {
-    public class FindProductByIdQueryResult
+    public class FindProductQueryResult
     {
         public int Id { get; set; }
         public string Name { get; set; }

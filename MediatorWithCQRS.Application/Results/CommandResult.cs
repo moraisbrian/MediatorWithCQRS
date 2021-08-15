@@ -1,4 +1,4 @@
-﻿namespace MediatorWithCQRS.Application.CommandsResult
+﻿namespace MediatorWithCQRS.Application.Results
 {
     public class CommandResult
     {

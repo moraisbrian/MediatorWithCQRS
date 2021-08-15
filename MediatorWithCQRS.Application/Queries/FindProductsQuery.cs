@@ -1,10 +1,10 @@
 ﻿using MediatorWithCQRS.Application.Results;
 using MediatR;
+using System.Collections.Generic;
 
 namespace MediatorWithCQRS.Application.Queries
 {
-    public class FindProductByIdQuery : IRequest<FindProductQueryResult>
+    public class FindProductsQuery : IRequest<IEnumerable<FindProductQueryResult>>
     {
-        public int Id { get; set; }
     }
 }

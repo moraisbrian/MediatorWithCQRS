@@ -1,13 +1,10 @@
-using MediatorWithCQRS.Data.Repositories;
-using MediatorWithCQRS.Domain.interfaces;
-using MediatR;
+using MediatorWithCQRS.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
 
 namespace MediatorWithCQRS.Api
 {
@@ -31,9 +28,7 @@ namespace MediatorWithCQRS.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MediatorWithCQRS.Api", Version = "v1" });
             });
 
-            services.AddMediatR(AppDomain.CurrentDomain.Load("MediatorWithCQRS.Application"));
-
-            services.AddScoped<IProductRepository, ProductRepository>();
+            services.ConfigureDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

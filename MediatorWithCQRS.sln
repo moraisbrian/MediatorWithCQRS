@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatorWithCQRS.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatorWithCQRS.Data", "MediatorWithCQRS.Data\MediatorWithCQRS.Data.csproj", "{FAB1EFD0-6342-4AF5-9EFB-2CD717720A01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatorWithCQRS.IoC", "MediatorWithCQRS.IoC\MediatorWithCQRS.IoC.csproj", "{74F13D71-374E-4CB5-8A82-DF51DB7F453E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FAB1EFD0-6342-4AF5-9EFB-2CD717720A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAB1EFD0-6342-4AF5-9EFB-2CD717720A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAB1EFD0-6342-4AF5-9EFB-2CD717720A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74F13D71-374E-4CB5-8A82-DF51DB7F453E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F13D71-374E-4CB5-8A82-DF51DB7F453E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F13D71-374E-4CB5-8A82-DF51DB7F453E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F13D71-374E-4CB5-8A82-DF51DB7F453E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,10 @@
 ﻿using MediatorWithCQRS.Application.Commands;
 using MediatorWithCQRS.Application.Queries;
-using MediatorWithCQRS.Application.QueriesResult;
+using MediatorWithCQRS.Application.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MediatorWithCQRS.Api.Controllers
@@ -18,19 +20,62 @@ namespace MediatorWithCQRS.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<FindProductByIdQueryResult>> GetTest(int id)
+        public async Task<ActionResult<FindProductQueryResult>> GetProductById(int id)
         {
-            var query = new FindProductByIdQuery();
-            query.Id = id;
-            var result = await _mediator.Send(query);
-            return Ok(result);
+            try
+            {
+                if (id > 0)
+                {
+                    var query = new FindProductByIdQuery();
+                    query.Id = id;
+                    var result = await _mediator.Send(query);
+                    return Ok(result); 
+                }
+                else
+                {
+                    throw new ArgumentException("Id menor ou igual a 0");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao consultar produto: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<FindProductQueryResult>>> GetProducts()
+        {
+            try
+            {
+                var query = new FindProductsQuery();
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao consultar produtos: {ex.Message}");
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> AddProduct([FromBody] CreateProductCommand productRequest)
+        public async Task<ActionResult<bool>> AddProduct([FromBody] CreateProductCommand createProductCommand)
         {
-            var result = await _mediator.Send(productRequest);
-            return Ok(result);
+            try
+            {
+                if (createProductCommand.IsValid())
+                {
+                    var result = await _mediator.Send(createProductCommand);
+                    return Ok(result);
+                }
+                else
+                {
+                    throw new ArgumentException("Valores nulos ou vazios");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao adicionar produto: {ex.Message}");
+            }
         }
     }
 }

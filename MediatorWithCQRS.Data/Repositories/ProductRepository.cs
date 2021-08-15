@@ -11,15 +11,17 @@ namespace MediatorWithCQRS.Data.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly string _connectionString;
+        private readonly string _connStrWriteDb;
+        private readonly string _connStrReadDb;
         public ProductRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("WriteDB");
+            _connStrWriteDb = configuration.GetConnectionString("WriteDB");
+            _connStrReadDb = configuration.GetConnectionString("ReadDB");
         }
 
         public async Task<bool> AddProduct(Product product)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            using (var conn = new NpgsqlConnection(_connStrWriteDb))
             {
                 conn.Open();
 
@@ -46,7 +48,7 @@ namespace MediatorWithCQRS.Data.Repositories
 
         public async Task<bool> DeleteProductById(int id)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            using (var conn = new NpgsqlConnection(_connStrWriteDb))
             {
                 conn.Open();
 
@@ -64,7 +66,7 @@ namespace MediatorWithCQRS.Data.Repositories
 
         public async Task<Product> GetProductById(int id)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            using (var conn = new NpgsqlConnection(_connStrWriteDb))
             {
                 conn.Open();
 
@@ -79,7 +81,7 @@ namespace MediatorWithCQRS.Data.Repositories
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            using (var conn = new NpgsqlConnection(_connStrWriteDb))
             {
                 conn.Open();
 
@@ -91,7 +93,7 @@ namespace MediatorWithCQRS.Data.Repositories
 
         public async Task<bool> UpdateProduct(Product product)
         {
-            using (var conn = new NpgsqlConnection(_connectionString))
+            using (var conn = new NpgsqlConnection(_connStrWriteDb))
             {
                 conn.Open();
 
